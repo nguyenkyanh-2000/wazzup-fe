@@ -1,4 +1,3 @@
-import { Link as RouterLink } from "react-router-dom";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import headerImage from "../assets/event.png";

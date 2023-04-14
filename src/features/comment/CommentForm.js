@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { Stack, Avatar, TextField, IconButton, Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Stack, Avatar, TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { createComment } from "./commentSlice";
 import { AuthContext } from "../../contexts/AuthContext";

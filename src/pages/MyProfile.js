@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { getCurrentUser } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
 import { Avatar, Button, Divider, Stack, Typography } from "@mui/material";

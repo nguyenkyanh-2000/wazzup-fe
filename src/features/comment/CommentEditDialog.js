@@ -7,13 +7,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Typography } from "@mui/material";
-import FTextField from "../../components/FTextField";
-import FormProvider from "../../components/FormProvider.js";
+import FTextField from "../../components/form/FTextField";
+import FormProvider from "../../components/form/FormProvider.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { alpha } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { getComments, updateComment } from "./commentSlice";
+import { updateComment } from "./commentSlice";
 
 const yupSchema = Yup.object().shape({
   content: Yup.string().required("Content is required"),

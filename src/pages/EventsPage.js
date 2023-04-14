@@ -1,23 +1,15 @@
-import { Button } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
+import EventForm from "../features/event/EventForm";
+import EventList from "../features/event/EventList";
 import React from "react";
 
 function EventsPage() {
-  const successCallback = (position) => {
-    console.log(position.coords.latitude);
-  };
-
-  const errorCallback = (error) => {
-    console.log(error);
-  };
-
   return (
-    <Button
-      onClick={() =>
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
-      }
-    >
-      Click me
-    </Button>
+    <Stack alignItems={"center"}>
+      <EventForm></EventForm>
+      <EventList></EventList>
+      <Pagination></Pagination>
+    </Stack>
   );
 }
 

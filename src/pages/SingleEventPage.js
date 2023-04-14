@@ -1,5 +1,5 @@
 import { Box, Divider, Stack, Typography, Button } from "@mui/material";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleEvent } from "../features/event/eventSlice";
@@ -13,7 +13,6 @@ import {
   getOrganizer,
   unattendEvent,
 } from "../features/user/userSlice";
-import { AuthContext } from "../contexts/AuthContext";
 import CommentList from "../features/comment/CommentList";
 import CommentForm from "../features/comment/CommentForm";
 

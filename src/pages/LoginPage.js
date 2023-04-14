@@ -7,10 +7,10 @@ import {
   Container,
   Link,
 } from "@mui/material";
-import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import FormProvider from "../components/FormProvider";
-import FTextField from "../components/FTextField";
+import FormProvider from "../components/form/FormProvider";
+import FTextField from "../components/form/FTextField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
