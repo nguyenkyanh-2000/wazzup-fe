@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import apiService from "../../app/apiService";
 import queryString from "query-string";
+import { toast } from "react-hot-toast";
 
 const initialState = {
   isLoading: false,
@@ -50,6 +51,7 @@ export const getEvents =
       dispatch(slice.actions.getEventsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 

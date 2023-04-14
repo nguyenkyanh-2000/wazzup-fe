@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 import apiService from "../../app/apiService";
 
 const initialState = {
@@ -23,7 +24,7 @@ const slice = createSlice({
 
     getCommentsSuccess(state, action) {
       state.isLoading = false;
-      state.error = "";
+      state.error = null;
       const { comments } = action.payload;
       state.comments = comments;
     },
@@ -31,6 +32,25 @@ const slice = createSlice({
     createCommentSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
+    },
+
+    updateCommentSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const { comment } = action.payload;
+      const commentId = state.comments.findIndex(
+        (currentComment) => currentComment._id === comment._id
+      );
+      state.comments[commentId] = comment;
+    },
+
+    deleteCommentSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const { commentId } = action.payload;
+      state.comments = state.comments.filter(
+        (comment) => comment._id !== commentId
+      );
     },
   },
 });
@@ -48,6 +68,7 @@ export const getComments = (eventId) => async (dispatch) => {
     );
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
+    toast(error.message);
   }
 };
 
@@ -60,8 +81,41 @@ export const createComment = (eventId, content) => async (dispatch) => {
     });
     dispatch(slice.actions.createCommentSuccess(response.data));
     dispatch(getComments(eventId));
+    toast("Create comment successful");
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
+    toast(error.message);
+  }
+};
+
+export const updateComment =
+  (commentId, eventId, content) => async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await apiService.put(`/comments/${commentId}`, {
+        content,
+      });
+      dispatch(slice.actions.updateCommentSuccess(response.data));
+      dispatch(getComments(eventId));
+      toast("Update comment successful!");
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
+    }
+  };
+
+export const deleteComment = (commentId, eventId) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.delete(`/comments/${commentId}`);
+    dispatch(
+      slice.actions.deleteCommentSuccess({ ...response.data, commentId })
+    );
+    dispatch(getComments(eventId));
+    toast("Comment deleted");
+  } catch (error) {
+    dispatch(slice.actions.hasError(error.message));
+    toast(error.message);
   }
 };
 

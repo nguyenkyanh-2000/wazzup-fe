@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 import apiService from "../../app/apiService";
 import { cloudinaryUpload } from "../../utils/cloudinary";
 
@@ -67,6 +68,7 @@ export const getAttendees =
       dispatch(slice.actions.getAttendeesSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
@@ -79,6 +81,7 @@ export const getOrganizer =
       dispatch(slice.actions.getOrganizerSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
@@ -91,6 +94,7 @@ export const getUser =
       dispatch(slice.actions.getUserSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
@@ -101,6 +105,7 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch(slice.actions.getUserSuccess(response.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
+    toast(error.message);
   }
 };
 
@@ -117,8 +122,10 @@ export const updateCurrentUser =
         location,
       });
       dispatch(slice.actions.updateUserSuccess(response.data));
+      toast("Update user successful");
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
@@ -129,8 +136,10 @@ export const attendEvent =
     try {
       const response = await apiService.post(`/events/attend/${id}`);
       dispatch(slice.actions.attendEventSuccess(response.data));
+      toast("Attend event successful!");
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
@@ -141,8 +150,10 @@ export const unattendEvent =
     try {
       const response = await apiService.post(`/events/unattend/${id}`);
       dispatch(slice.actions.unattendEventSuccess(response.data));
+      toast("Unattend event successful!");
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 
