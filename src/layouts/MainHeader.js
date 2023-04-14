@@ -10,6 +10,7 @@ import {
   Menu,
   MenuItem,
   Typography,
+  Avatar,
 } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
 import LinksModal from "../components/LinksModal";
@@ -78,7 +79,7 @@ function MainHeader() {
       </Box>
       <MenuItem
         onClick={handleMenuClose}
-        to="/"
+        to="/users/me"
         component={RouterLink}
         sx={{ mx: 1 }}
       >
@@ -130,7 +131,10 @@ function MainHeader() {
                 style={buttonStyle}
                 onClick={handleProfileMenuOpen}
               >
-                Me
+                <Avatar
+                  src={user.avatarUrl}
+                  sx={{ width: "24px", height: "24px" }}
+                ></Avatar>
               </Button>
             ) : (
               <Button

@@ -27,6 +27,12 @@ const slice = createSlice({
       const { events } = action.payload;
       state.events = events;
     },
+    getSingleEventSuccess(state, action) {
+      state.isLoading = true;
+      state.error = null;
+      const { event } = action.payload;
+      state.currentEvent = event;
+    },
   },
 });
 
@@ -42,6 +48,18 @@ export const getEvents =
       );
       console.log(response);
       dispatch(slice.actions.getEventsSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+    }
+  };
+
+export const getSingleEvent =
+  ({ id }) =>
+  async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await apiService.get(`/events/${id}`);
+      dispatch(slice.actions.getSingleEventSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
     }

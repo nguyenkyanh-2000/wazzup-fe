@@ -27,9 +27,9 @@ function UpcomingEvents() {
         Upcoming events
       </Typography>
       <Grid container spacing={4} paddingX={4} justifyContent="center" my={1}>
-        {events.map((event) => {
+        {events.map((event, index) => {
           return (
-            <Grid item>
+            <Grid key={index} item>
               <EventCard event={event}></EventCard>
             </Grid>
           );
