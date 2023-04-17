@@ -114,9 +114,9 @@ function MainHeader() {
             <Button
               color={"inherit"}
               style={buttonStyle}
-              onClick={() => navigate("/events")}
+              onClick={() => navigate("/createEvent")}
             >
-              Discover
+              Create Event
             </Button>
             <Button
               color={"inherit"}

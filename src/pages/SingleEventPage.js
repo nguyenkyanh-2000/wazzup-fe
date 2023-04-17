@@ -15,6 +15,7 @@ import {
 } from "../features/user/userSlice";
 import CommentList from "../features/comment/CommentList";
 import CommentForm from "../features/comment/CommentForm";
+import { isInThePast } from "../utils/isInThePast";
 
 function SingleEventPage() {
   const { attendees } = useSelector((state) => state.user);
@@ -28,7 +29,6 @@ function SingleEventPage() {
   useEffect(() => {
     dispatch(getSingleEvent(id));
     dispatch(getOrganizer(id));
-    dispatch(getCurrentUser());
   }, [attendees, dispatch, id]);
 
   return (
@@ -64,7 +64,8 @@ function SingleEventPage() {
                 {dayjs(currentEvent.time).format("ddd, MMM D, YYYY h:mm A")}
               </Typography>
               <Typography>Location: {currentEvent.location?.name}</Typography>
-              {user.futureEvents?.includes(currentEvent._id) &&
+              {!isInThePast(currentEvent.time) &&
+                user.futureEvents?.includes(currentEvent._id) &&
                 currentEvent.organizer !== user._id && (
                   <Button
                     onClick={() => {
@@ -76,16 +77,17 @@ function SingleEventPage() {
                     Unattend event
                   </Button>
                 )}
-              {!user.futureEvents?.includes(currentEvent._id) && (
-                <Button
-                  onClick={() =>
-                    dispatch(attendEvent({ id: currentEvent._id }))
-                  }
-                  variant="contained"
-                >
-                  Join event
-                </Button>
-              )}
+              {!isInThePast(currentEvent.time) &&
+                !user.futureEvents?.includes(currentEvent._id) && (
+                  <Button
+                    onClick={() =>
+                      dispatch(attendEvent({ id: currentEvent._id }))
+                    }
+                    variant="contained"
+                  >
+                    Join event
+                  </Button>
+                )}
             </Stack>
           </Stack>
           <Typography>Description: {currentEvent.description}</Typography>

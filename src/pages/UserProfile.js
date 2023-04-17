@@ -28,7 +28,7 @@ function UserProfile() {
       </Typography>
       <Typography>
         <strong>Location: </strong>
-        {user.location.name}
+        {user.location?.name}
       </Typography>
     </Stack>
   );

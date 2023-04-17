@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BlankLayout from "../layouts/BlankLayout";
 import MainLayout from "../layouts/MainLayout";
+import CreateEventPage from "../pages/CreateEventPage";
 import EventsPage from "../pages/EventsPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
@@ -29,12 +30,20 @@ function Router() {
               </AuthRequire>
             }
           />
+          <Route
+            path="/createEvent"
+            element={
+              <AuthRequire>
+                <CreateEventPage />
+              </AuthRequire>
+            }
+          />
         </Route>
         <Route element={<BlankLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
