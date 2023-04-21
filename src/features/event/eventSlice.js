@@ -44,7 +44,7 @@ export const getEvents =
     const query = { page, limit, ...body };
     try {
       const response = await apiService.get(
-        `/events/?${queryString.stringify(query)}`
+        `/events/?${queryString.stringify(query, { encode: false })}`
       );
       console.log(response);
       dispatch(slice.actions.getEventsSuccess(response.data));

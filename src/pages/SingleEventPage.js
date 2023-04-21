@@ -29,6 +29,7 @@ function SingleEventPage() {
   useEffect(() => {
     dispatch(getSingleEvent(id));
     dispatch(getOrganizer(id));
+    dispatch(getCurrentUser());
   }, [attendees, dispatch, id]);
 
   return (
@@ -65,8 +66,8 @@ function SingleEventPage() {
               </Typography>
               <Typography>Location: {currentEvent.location?.name}</Typography>
               {!isInThePast(currentEvent.time) &&
-                user.futureEvents?.includes(currentEvent._id) &&
-                currentEvent.organizer !== user._id && (
+                attendees.includes(user._id) &&
+                organizer._id !== user._id && (
                   <Button
                     onClick={() => {
                       dispatch(unattendEvent({ id: currentEvent._id }));
@@ -78,7 +79,8 @@ function SingleEventPage() {
                   </Button>
                 )}
               {!isInThePast(currentEvent.time) &&
-                !user.futureEvents?.includes(currentEvent._id) && (
+                !user.futureEvents?.includes(currentEvent._id) &&
+                currentEvent.organizer !== user._id && (
                   <Button
                     onClick={() =>
                       dispatch(attendEvent({ id: currentEvent._id }))
@@ -90,7 +92,12 @@ function SingleEventPage() {
                 )}
             </Stack>
           </Stack>
-          <Typography>Description: {currentEvent.description}</Typography>
+          <Typography>
+            Description:{" "}
+            {currentEvent.description
+              ? currentEvent.description
+              : "No description"}
+          </Typography>
           <EventAttendees eventId={id}></EventAttendees>
           <CommentList eventId={id}></CommentList>
           <CommentForm eventId={id}></CommentForm>
