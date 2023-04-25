@@ -13,7 +13,7 @@ function EventsPage() {
     limit: 5,
   });
   const dispatch = useDispatch();
-  const { events } = useSelector((state) => state.event);
+  const { events, totalPages } = useSelector((state) => state.event);
 
   useEffect(() => {
     dispatch(getEvents(formData));
@@ -23,7 +23,13 @@ function EventsPage() {
     <Stack alignItems={"center"}>
       <EventsForm setFormData={setFormData}></EventsForm>
       <EventsList events={events}></EventsList>
-      <Pagination></Pagination>
+      <Pagination
+        sx={{ alignSelf: "center", marginTop: 6 }}
+        count={totalPages}
+        onChange={(event, value) => {
+          setFormData({ ...formData, page: value });
+        }}
+      ></Pagination>
     </Stack>
   );
 }

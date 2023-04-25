@@ -2,7 +2,7 @@ import { Box, Divider, Stack, Typography, Button } from "@mui/material";
 import { useEffect } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleEvent } from "../features/event/eventSlice";
+import { deleteEvent, getSingleEvent } from "../features/event/eventSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import EventAttendees from "../features/user/EventAttendees";
@@ -62,34 +62,60 @@ function SingleEventPage() {
             <Stack>
               <Typography>
                 Time:
-                {dayjs(currentEvent.time).format("ddd, MMM D, YYYY h:mm A")}
+                {" " +
+                  dayjs(currentEvent.time).format("ddd, MMM D, YYYY h:mm A")}
               </Typography>
               <Typography>Location: {currentEvent.location?.name}</Typography>
-              {!isInThePast(currentEvent.time) &&
-                attendees.includes(user._id) &&
-                organizer._id !== user._id && (
-                  <Button
-                    onClick={() => {
-                      dispatch(unattendEvent({ id: currentEvent._id }));
-                      dispatch(getAttendees(id));
-                    }}
-                    variant="contained"
-                  >
-                    Unattend event
-                  </Button>
-                )}
-              {!isInThePast(currentEvent.time) &&
-                !user.futureEvents?.includes(currentEvent._id) &&
-                currentEvent.organizer !== user._id && (
-                  <Button
-                    onClick={() =>
-                      dispatch(attendEvent({ id: currentEvent._id }))
-                    }
-                    variant="contained"
-                  >
-                    Join event
-                  </Button>
-                )}
+              <Stack spacing={3} marginTop={3}>
+                {!isInThePast(currentEvent.time) &&
+                  attendees.includes(user._id) &&
+                  organizer._id !== user._id && (
+                    <Button
+                      onClick={() => {
+                        dispatch(unattendEvent({ id: currentEvent._id }));
+                        dispatch(getAttendees(id));
+                      }}
+                      variant="contained"
+                    >
+                      Unattend event
+                    </Button>
+                  )}
+                {!isInThePast(currentEvent.time) &&
+                  !user.futureEvents?.includes(currentEvent._id) &&
+                  currentEvent.organizer !== user._id && (
+                    <Button
+                      onClick={() =>
+                        dispatch(attendEvent({ id: currentEvent._id }))
+                      }
+                      variant="contained"
+                    >
+                      Join event
+                    </Button>
+                  )}
+                {!isInThePast(currentEvent.time) &&
+                  organizer._id === user._id && (
+                    <Button
+                      onClick={() => {
+                        console.log("Clicked");
+                      }}
+                      variant="contained"
+                    >
+                      Update event
+                    </Button>
+                  )}
+                {!isInThePast(currentEvent.time) &&
+                  organizer._id === user._id && (
+                    <Button
+                      onClick={() => {
+                        dispatch(deleteEvent({ id: currentEvent._id }));
+                        navigate("/");
+                      }}
+                      variant="contained"
+                    >
+                      Delete event
+                    </Button>
+                  )}
+              </Stack>
             </Stack>
           </Stack>
           <Typography>

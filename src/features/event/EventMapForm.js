@@ -1,85 +1,54 @@
-import {
-  Autocomplete,
-  GoogleMap,
-  LoadScript,
-  MarkerF,
-} from "@react-google-maps/api";
-import React, { useState } from "react";
-import { GOOGLE_MAP_API_KEY } from "../../app/config";
+import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "mapbox-gl";
+import { MAPBOX_MAP_API_KEY } from "../../app/config";
+import { Container } from "@mui/material";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
-const containerStyle = {
-  width: "100%",
-  height: "500px",
-};
+mapboxgl.accessToken = MAPBOX_MAP_API_KEY;
 
-const center = {
-  lat: 10.823099,
-  lng: 106.629662,
-};
+function EventMapForm({ setValue }) {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(-70.9);
+  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(9);
 
-function EventMapForm() {
-  const [markerLocation, setMarkerLocation] = useState(center);
-  const [autocompleteResult, setAutocompleteResult] = useState();
-  const handleOnClick = (e) => {
-    setMarkerLocation({
-      lat: parseFloat(e.latLng.lat()),
-      lng: parseFloat(e.latLng.lng()),
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [lng, lat],
+      zoom: zoom,
+      attributionControl: false,
     });
-  };
 
-  const onPlaceChanged = () => {
-    if (autocompleteResult) {
-      console.log(autocompleteResult.getPlace().formatted_address);
-      const lat = autocompleteResult.getPlace().geometry.location.lat();
-      const lng = autocompleteResult.getPlace().geometry.location.lng();
-      setMarkerLocation({ lat, lng });
-    }
-  };
+    let geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      placeholder: "Choose your location",
+      marker: {
+        color: "orange",
+      },
+      mapboxgl: mapboxgl,
+    });
 
-  const onLoad = (autocomplete) => {
-    setAutocompleteResult(autocomplete);
-  };
+    map.current.addControl(geocoder, "top-left");
+    map.current.on("moveend", () => {
+      setLng(map.current.getCenter().lng.toFixed(4));
+      setLat(map.current.getCenter().lat.toFixed(4));
+      setValue("lngLat", [lng, lat]);
+      setZoom(map.current.getZoom().toFixed(2));
+    });
+  }, [lat, lng, zoom, setValue]);
+
   return (
-    <LoadScript googleMapsApiKey={GOOGLE_MAP_API_KEY} libraries={["places"]}>
-      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-        <input
-          type="text"
-          placeholder="Location name"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "50%",
-            marginLeft: "-120px",
-          }}
-        />
-      </Autocomplete>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        options={{
-          draggingCursor: true,
-          scrollwheel: false,
-          keyboardShortcuts: false,
-          mapTypeControl: false,
-          fullscreenControl: false,
-          zoomControl: true,
-          streetViewControl: false,
-        }}
-        onClick={handleOnClick}
-        center={markerLocation}
-        zoom={14}
-      >
-        <MarkerF position={markerLocation}></MarkerF>
-      </GoogleMap>
-    </LoadScript>
+    <Container
+      ref={mapContainer}
+      sx={{
+        width: { xs: "250px", sm: "500px" },
+        height: { xs: "250px", sm: "500px" },
+      }}
+    ></Container>
   );
 }
 

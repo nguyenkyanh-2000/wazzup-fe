@@ -3,7 +3,6 @@ import React from "react";
 import HorizontalEventCard from "./HorizontalEventCard";
 
 function EventsList({ events }) {
-  console.log(events);
   return (
     <Stack
       alignItems={"center"}

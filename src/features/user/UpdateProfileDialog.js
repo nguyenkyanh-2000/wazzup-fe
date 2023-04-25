@@ -42,7 +42,6 @@ export default function UpdateProfileDialog() {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(
       updateCurrentUser({
         name: data.name,

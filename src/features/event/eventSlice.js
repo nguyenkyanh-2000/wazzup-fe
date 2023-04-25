@@ -9,6 +9,7 @@ const initialState = {
   events: [],
   currentEvent: {},
   totalPages: 1,
+  currentPage: 1,
 };
 
 const slice = createSlice({
@@ -25,14 +26,21 @@ const slice = createSlice({
     getEventsSuccess(state, action) {
       state.isLoading = true;
       state.error = null;
-      const { events } = action.payload;
+      const { events, totalPages } = action.payload;
       state.events = events;
+      state.totalPages = totalPages;
     },
     getSingleEventSuccess(state, action) {
       state.isLoading = true;
       state.error = null;
       const { event } = action.payload;
       state.currentEvent = event;
+    },
+    deleteEventSuccess(state, action) {
+      state.isLoading = true;
+      state.error = null;
+      const { eventId } = action.payload;
+      state.events = state.events.filter((event) => event._id !== eventId);
     },
   },
 });
@@ -46,7 +54,6 @@ export const getEvents =
       const response = await apiService.get(
         `/events/?${queryString.stringify(query, { encode: false })}`
       );
-      console.log(response);
       dispatch(slice.actions.getEventsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
@@ -63,6 +70,22 @@ export const getSingleEvent =
       dispatch(slice.actions.getSingleEventSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
+    }
+  };
+
+export const deleteEvent =
+  ({ id }) =>
+  async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await apiService.delete(`/events/${id}`);
+      dispatch(
+        slice.actions.deleteEventSuccess({ ...response.data, eventId: id })
+      );
+      toast("Delete event successful");
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
     }
   };
 

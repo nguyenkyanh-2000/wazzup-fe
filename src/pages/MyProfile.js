@@ -30,7 +30,6 @@ function MyProfile() {
         {user.location.name}
       </Typography>
       <UpdateProfileDialog></UpdateProfileDialog>
-      <Button variant="contained">Delete user</Button>
     </Stack>
   );
 }
