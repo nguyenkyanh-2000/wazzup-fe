@@ -31,6 +31,13 @@ const slice = createSlice({
       state.events = events;
       state.totalPages = totalPages;
     },
+    getEventsForCurrentUserSuccess(state, action) {
+      state.isLoading = true;
+      state.error = null;
+      const { events, totalPages } = action.payload;
+      state.events = events;
+      state.totalPages = totalPages;
+    },
     getSingleEventSuccess(state, action) {
       state.isLoading = true;
       state.error = null;
@@ -60,6 +67,22 @@ export const getEvents =
         `/events/?${queryString.stringify(query, { encode: false })}`
       );
       dispatch(slice.actions.getEventsSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+      toast(error.message);
+    }
+  };
+
+export const getEventsFromCurrentUser =
+  ({ page = 1, limit = 5 }) =>
+  async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    const query = { page, limit };
+    try {
+      const response = await apiService.get(
+        `/events/me?${queryString.stringify(query, { encode: false })}`
+      );
+      dispatch(slice.actions.getEventsForCurrentUserSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast(error.message);

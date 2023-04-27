@@ -6,6 +6,7 @@ import CreateEventPage from "../pages/CreateEventPage";
 import EventsPage from "../pages/EventsPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import MyEvents from "../pages/MyEvents";
 import MyProfile from "../pages/MyProfile";
 import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -20,8 +21,6 @@ function Router() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/events/:id" element={<SingleEventPage />} />
-          <Route path="/users/:id" element={<UserProfile />} />
-          <Route path="/events" element={<EventsPage />} />
           <Route
             path="/users/me"
             element={
@@ -30,6 +29,16 @@ function Router() {
               </AuthRequire>
             }
           />
+          <Route
+            path="/events/me"
+            element={
+              <AuthRequire>
+                <MyEvents />
+              </AuthRequire>
+            }
+          />
+          <Route path="/users/:id" element={<UserProfile />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route
             path="/createEvent"
             element={

@@ -85,7 +85,15 @@ function MainHeader() {
       >
         My Profile
       </MenuItem>
-      <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
+      <MenuItem
+        onClick={handleMenuClose}
+        to="events/me"
+        component={RouterLink}
+        sx={{ mx: 1 }}
+      >
+        My Events
+      </MenuItem>
+      <MenuItem onClick={handleLogout} sx={{ mx: 1 }}>
         Logout
       </MenuItem>
     </Menu>
