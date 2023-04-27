@@ -16,6 +16,7 @@ import {
 import CommentList from "../features/comment/CommentList";
 import CommentForm from "../features/comment/CommentForm";
 import { isInThePast } from "../utils/isInThePast";
+import EventMap from "../features/event/EventMap";
 
 function SingleEventPage() {
   const { attendees } = useSelector((state) => state.user);
@@ -94,14 +95,7 @@ function SingleEventPage() {
                   )}
                 {!isInThePast(currentEvent.time) &&
                   organizer._id === user._id && (
-                    <Button
-                      onClick={() => {
-                        console.log("Clicked");
-                      }}
-                      variant="contained"
-                    >
-                      Update event
-                    </Button>
+                    <Button variant="contained">Update event</Button>
                   )}
                 {!isInThePast(currentEvent.time) &&
                   organizer._id === user._id && (
@@ -115,11 +109,17 @@ function SingleEventPage() {
                       Delete event
                     </Button>
                   )}
+                {currentEvent.location?.coordinates && (
+                  <EventMap
+                    eventLng={currentEvent.location.coordinates[0]}
+                    eventLat={currentEvent.location.coordinates[1]}
+                  ></EventMap>
+                )}
               </Stack>
             </Stack>
           </Stack>
           <Typography>
-            Description:{" "}
+            Description:
             {currentEvent.description
               ? currentEvent.description
               : "No description"}

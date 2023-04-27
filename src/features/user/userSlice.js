@@ -105,7 +105,6 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch(slice.actions.getUserSuccess(response.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
-    toast(error.message);
   }
 };
 

@@ -7,14 +7,43 @@ import FTextField from "../components/form/FTextField";
 import EventMapForm from "../features/event/EventMapForm";
 import * as yup from "yup";
 import FDateTimePicker from "../components/form/FDateTimePicker";
+import { useDispatch } from "react-redux";
+import { createEvent } from "../features/event/eventSlice";
+import dayjs from "dayjs";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-hot-toast";
+
+const defaultValues = {
+  eventName: "",
+  locationName: "",
+  eventDescription: "",
+  eventTime: null,
+  lngLat: null,
+};
+
+const schema = yup
+  .object({
+    eventName: yup.string().required(),
+    locationName: yup.string().required(),
+    eventDescription: yup.string(),
+  })
+  .required();
 
 function CreateEventPage() {
-  const methods = useForm();
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: defaultValues,
+  });
   const fileInput = useRef();
   const { handleSubmit, setValue } = methods;
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (!data.eventTime) toast("Please choose a time for the event");
+    else
+      dispatch(
+        createEvent({ ...data, time: dayjs(data.eventTime).toISOString() })
+      );
   };
 
   const handleFile = (event) => {
@@ -42,7 +71,6 @@ function CreateEventPage() {
           ></FTextField>
           <Typography> Please choose time for the event</Typography>
           <FDateTimePicker name={"eventTime"}></FDateTimePicker>
-          <Typography> Please choose the location on the map</Typography>
           <EventMapForm setValue={setValue}></EventMapForm>
           <Typography> Please upload the event's cover</Typography>
           <input

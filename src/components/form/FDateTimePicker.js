@@ -16,6 +16,7 @@ function FDateTimePicker({ name, label, ...other }) {
         defaultValue={null}
         render={({ field: { onChange, value } }) => (
           <DateTimePicker
+            defaultValue={new Date()}
             label={label}
             value={value}
             onChange={(value) => onChange(dayjs(value))}
