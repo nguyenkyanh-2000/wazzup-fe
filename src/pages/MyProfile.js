@@ -19,15 +19,15 @@ function MyProfile() {
       <Divider></Divider>
       <Avatar src={user.avatarUrl}></Avatar>
       <Typography>
-        <strong> Name: </strong> {user.name}
+        <strong> Name: </strong> {user?.name}
       </Typography>
       <Typography>
         <strong>About me: </strong>
-        {user.biography}
+        {user?.biography}
       </Typography>
       <Typography>
         <strong>Location: </strong>
-        {user.location.name}
+        {user.location?.name}
       </Typography>
       <UpdateProfileDialog></UpdateProfileDialog>
     </Stack>
