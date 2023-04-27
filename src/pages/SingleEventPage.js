@@ -95,10 +95,6 @@ function SingleEventPage() {
                   )}
                 {!isInThePast(currentEvent.time) &&
                   organizer._id === user._id && (
-                    <Button variant="contained">Update event</Button>
-                  )}
-                {!isInThePast(currentEvent.time) &&
-                  organizer._id === user._id && (
                     <Button
                       onClick={() => {
                         dispatch(deleteEvent({ id: currentEvent._id }));
