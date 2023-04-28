@@ -91,7 +91,7 @@ function SingleEventPage() {
                   )}
                 {!isInThePast(currentEvent.time) &&
                   !user.futureEvents?.includes(currentEvent._id) &&
-                  currentEvent.organizer !== user._id && (
+                  organizer !== user._id && (
                     <Button
                       onClick={() =>
                         dispatch(attendEvent({ id: currentEvent._id }))
