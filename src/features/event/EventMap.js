@@ -39,8 +39,8 @@ export default function EventMap({ eventLng, eventLat }) {
     <Container
       ref={mapContainer}
       sx={{
-        width: { xs: "250px", sm: "500px" },
-        height: { xs: "250px", sm: "500px" },
+        width: { xs: "200px", sm: "300px" },
+        height: { xs: "200px", sm: "300px" },
       }}
     ></Container>
   );

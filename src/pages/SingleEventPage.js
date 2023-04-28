@@ -51,11 +51,12 @@ function SingleEventPage() {
             direction={{ xs: "column", sm: "row" }}
             spacing={5}
             justifyContent="space-between"
+            alignItems={"center"}
           >
-            <Box maxWidth="1000px" width="100%" maxHeight="800px">
+            <Box maxWidth="1000px" width="100%">
               <img
                 width={"100%"}
-                height={"100%"}
+                height={"auto"}
                 src={`${currentEvent.coverUrl}`}
                 alt={`${currentEvent.description}`}
               ></img>
@@ -69,7 +70,12 @@ function SingleEventPage() {
               <Typography>
                 <strong>Location:</strong> {currentEvent.location?.name}
               </Typography>
-              <Stack spacing={3} marginTop={3}>
+              <Stack
+                spacing={3}
+                marginTop={3}
+                width={{ xs: "200px", sm: "300px" }}
+                height="auto"
+              >
                 {!isInThePast(currentEvent.time) &&
                   attendees.includes(user._id) &&
                   organizer._id !== user._id && (
