@@ -77,7 +77,7 @@ function SingleEventPage() {
                 height="auto"
               >
                 {!isInThePast(currentEvent.time) &&
-                  attendees.includes(user._id) &&
+                  currentEvent.attendees.includes(user._id) &&
                   organizer._id !== user._id && (
                     <Button
                       onClick={() => {
