@@ -12,7 +12,7 @@ function HomePage() {
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 2, delay: 1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
       >
         <HeaderText />
       </motion.div>
@@ -30,7 +30,7 @@ function HomePage() {
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 2, delay: 1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
       >
         <WhyUs />
       </motion.div>
