@@ -59,7 +59,9 @@ const slice = createSlice({
     unattendEventSuccess(state, action) {
       state.isLoading = true;
       state.error = null;
-      state.attendees.pull(state.user);
+      state.attendees = state.attendees.filter(
+        (attendee) => attendee._id !== state.user._id
+      );
     },
   },
 });
