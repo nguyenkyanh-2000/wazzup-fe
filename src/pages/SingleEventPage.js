@@ -45,7 +45,7 @@ function SingleEventPage() {
             component={"span"}
             onClick={() => navigate(`/users/${organizer._id}`)}
           >
-            Created by {organizer.name}
+            Created by <strong>{organizer.name}</strong>
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -62,11 +62,13 @@ function SingleEventPage() {
             </Box>
             <Stack>
               <Typography>
-                Time:
+                <strong>Time:</strong>
                 {" " +
                   dayjs(currentEvent.time).format("ddd, MMM D, YYYY h:mm A")}
               </Typography>
-              <Typography>Location: {currentEvent.location?.name}</Typography>
+              <Typography>
+                <strong>Location:</strong> {currentEvent.location?.name}
+              </Typography>
               <Stack spacing={3} marginTop={3}>
                 {!isInThePast(currentEvent.time) &&
                   attendees.includes(user._id) &&
@@ -115,7 +117,7 @@ function SingleEventPage() {
             </Stack>
           </Stack>
           <Typography>
-            Description:
+            <strong>Description:</strong>{" "}
             {currentEvent.description
               ? currentEvent.description
               : "No description"}
