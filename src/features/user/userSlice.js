@@ -28,6 +28,11 @@ const slice = createSlice({
       const user = action.payload;
       state.user = user;
     },
+    getUserFailure(state, action) {
+      state.isLoading = true;
+      state.error = null;
+      state.user = {};
+    },
     updateUserSuccess(state, action) {
       state.isLoading = true;
       state.error = null;
@@ -105,6 +110,7 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch(slice.actions.getUserSuccess(response.data));
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
+    dispatch(slice.actions.getUserFailure());
   }
 };
 
