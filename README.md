@@ -2,7 +2,7 @@
 
 ## Description:
 
-Wazzup is a web-based social and entertainment platform that offers users access to a wide range of event listings and, if desired, ticket sales. With Wazzup, users can easily search for events taking place in their city and register to attend. Additionally, the platform allows users to see who else is attending an event and to communicate directly with event organizers. For organizers, Wazzup offers a simple way to list and manage events, with tools for adjusting details such as location, time, and photos, as well as tracking attendee.
+Wazzup is a web-based social and entertainment platform that offers users access to a wide range of event listings. With Wazzup, users can easily search for events taking place in their city and register to attend. Additionally, the platform allows users to see who else is attending an event and to communicate directly with event organizers through comments. For organizers, Wazzup offers a simple way to list and manage events, with tools for adjusting details such as location, time, and photos, as well as tracking attendees.
 
 ## Features:
 
