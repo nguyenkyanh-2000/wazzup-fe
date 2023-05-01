@@ -43,6 +43,7 @@ Wazzup is a web-based social and entertainment platform that offers users access
 - [X] Map integration
 - [ ] Google Account integration 
 - [X] Search events based on distance
+- [X] Dark theme
 
 
 
