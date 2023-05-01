@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Wazzup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description:
 
-## Available Scripts
+Wazzup is a web-based social and entertainment platform that offers users access to a wide range of event listings and, if desired, ticket sales. With Wazzup, users can easily search for events taking place in their city and register to attend. Additionally, the platform allows users to see who else is attending an event and to communicate directly with event organizers. For organizers, Wazzup offers a simple way to list and manage events, with tools for adjusting details such as location, time, and photos, as well as tracking attendee numbers.
 
-In the project directory, you can run:
+## Features:
 
-### `npm start`
+### Authentication:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [X] User can browse the list of events without authentication.
+- [X] User can register for an account with email and password.
+- [ ] User will be logged in after registration.
+- [X] User must be logged in to attend / organize an event.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Users:
 
-### `npm test`
+- [X] Users can see related events (attended and attending events.)
+- [X] Users can see an individual user using a specific ID.
+- [X] As a user, I can update my profile (Avatar, Name, Location and a Bio).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Events: 
 
-### `npm run build`
+- [X] As a user, I can see a list of events.
+- [X] As a user, I can see the events' time, location, image, description.
+- [X] As a user, I can register for the events.
+- [X] As an organizer, I can create an event with time, location, image, description.
+- [X] As an organizer, I can delete one of my incoming events.
+- [ ] As an organizer, I can update on of my incoming events.
+- [X] There can be multiple user for one event.
+- [X] The organizer is also an attendee for the events.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Comments:
+- [X] As a user, I can see a list of comment on the event. 
+- [X] As a user, I can comment on the incoming / past events.
+- [X] As a user, I can delete my comment on the incoming / past events.
+- [X] As a user, I can edit my comment on the incoming / past events.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Advanced features:
+- [ ] Chat room.
+- [ ] Recommendation system based on distance.
+- [X] Map integration
+- [ ] Google Account integration 
+- [X] Search events based on distance
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
